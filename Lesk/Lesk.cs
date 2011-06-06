@@ -7,6 +7,14 @@ namespace Lesk
 {
     public class Lesk
     {
+        public const int NormalPriority = 3;
+
+        public const int AboveNormalPriority = 2;
+
+        public const int HighPriority = 1;
+
+        public const int LowPriorty = 4;
+
         public List<Tuple<Func<InputConsumer>, Func<Token>>> Consumers { get; private set; }
 
         public Lesk()
@@ -14,12 +22,12 @@ namespace Lesk
             Consumers = new List<Tuple<Func<InputConsumer>, Func<Token>>>();
         }
 
-        public void AddConsumer(Func<InputConsumer> consumer, Func<Token> tokenBuilder)
+        public void Add(string pattern, Func<Token> tokenBuilder, int priority = NormalPriority)
         {
-            Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(consumer, tokenBuilder));
+            Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, priority), tokenBuilder));
         }
 
-        public List<Token> Process(string input)
+        public List<Token> Tokenize(string input)
         {
             var context = new LeskContext(input);
             while (context.HasMore())
