@@ -1,0 +1,123 @@
+<stylecopresultscache>
+  <version>10</version>
+  <project key="-1435487753">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="CombinedConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:54</timestamp>
+    <milliseconds>28</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConfigurableConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:24:08</timestamp>
+    <milliseconds>775</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConsumeResult.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:11</timestamp>
+    <milliseconds>286</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="InputConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:11</timestamp>
+    <milliseconds>296</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FixedStringConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:46</timestamp>
+    <milliseconds>355</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LetterConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:24:02</timestamp>
+    <milliseconds>492</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Lesk.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:24:28</timestamp>
+    <milliseconds>623</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:22:20</timestamp>
+    <milliseconds>230</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NumberConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:31</timestamp>
+    <milliseconds>713</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="UnrecognizedLexemeException.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:24:26</timestamp>
+    <milliseconds>933</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Token.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:11</timestamp>
+    <milliseconds>296</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="WhitespaceConsumer.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:46</timestamp>
+    <milliseconds>355</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="LeskContext.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/01/2011 08:53:07</timestamp>
+      <milliseconds>495</milliseconds>
+    </settings>
+    <timestamp>06/06/2011 10:23:21</timestamp>
+    <milliseconds>731</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>
