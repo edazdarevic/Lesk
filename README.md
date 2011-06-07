@@ -1,5 +1,5 @@
 ## What is Lesk?
-Lesk is a lexical analyzer library. It helps you easly build your lexical analyzers at runtime. Lexical analyzers are also called lexers or tokenizers or scanners. Lexer transforms a sequence of characters to a sequence of tokens.
+Lesk is a lexical analyzer library. It helps you easily build your lexical analyzers at runtime. Lexical analyzers are also called lexers or tokenizers or scanners. Lexer transforms a sequence of characters to a sequence of tokens.
 
 ## How to use Lesk?
 Lesk uses regular expressions for defining tokens. For example a JSON lexer would be defined with something like this: 
