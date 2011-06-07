@@ -1,8 +1,8 @@
 ## What is Lesk?
-Lesk is lexical analyser for .NET framework. Lexical analysers are also called lexers or tokenizes or scanners. Lexer transforms a sequence of characters to a sequence of tokens.
+Lesk is a lexical analyzer library. It helps you easly build your lexical analyzers at runtime. Lexical analyzers are also called lexers or tokenizers or scanners. Lexer transforms a sequence of characters to a sequence of tokens.
 
 ## How to use Lesk?
-Lesk uses regular expressions for defining tokens. For example a JSON lexer would be defined like this: 
+Lesk uses regular expressions for defining tokens. For example a JSON lexer would be defined with something like this: 
 
     var jsonLexer = LeskInstance.Configure
                   .DefineToken(@"\s+", () => new WhitespaceToken())
@@ -31,7 +31,7 @@ Lesk internally relies on default .NET regular expression implementation. Howeve
 
 * Support for tokenizing directly from a Stream and yielding tokens as they become available 
 
-0.5 etc
+0.5 etc.
 
 * Recursive definition of tokes 
 * Other cool stuff
