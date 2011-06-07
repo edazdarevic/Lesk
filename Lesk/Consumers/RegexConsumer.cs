@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Lesk.Consumers
@@ -7,25 +8,31 @@ namespace Lesk.Consumers
     {
         public string Pattern { get; private set; }
 
-        public int Priority { get; private set; }
+        public Dictionary<string, Regex> RegexLookup { get; private set; }
 
-        public RegexConsumer(string pattern, int priority = Lesk.NormalPriority)
+        public RegexConsumer(string pattern, Dictionary<string, Regex> regexLookup)
         {
+            if (string.IsNullOrEmpty(pattern))
+            {
+                throw new ArgumentNullException("pattern");
+            }
+
+            if (regexLookup == null)
+            {
+                throw new ArgumentNullException("regexLookup");
+            }
+
             Pattern = pattern;
-            Priority = priority;
+            RegexLookup = regexLookup;
         }
 
         public override ConsumeResult Consume(LeskContext context)
         {
             var result = new ConsumeResult();
-            result.Priority = Priority;
 
-            var input = context.Input.Substring(context.Position, context.Input.Length - context.Position);
+            var match = RegexLookup[Pattern].Match(context.Input, context.Position);
 
-            var regex = new Regex(Pattern);
-            var match = regex.Match(input);
-
-            if (match.Success && match.Index == 0 && match.Length > 0)
+            if (match.Success && match.Index == context.Position && match.Length > 0)
             {
                 result.Success = true;
                 result.Consumed = match.Value;

@@ -25,7 +25,6 @@ namespace Lesk.Consumers
             }
 
             var result = new ConsumeResult();
-            result.Priority = 3;
             if (results.ToList().Any(r => r.Success == false))
             {
                 result.Success = false;

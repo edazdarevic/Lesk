@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consumers\RegexConsumer.cs" />
+    <Compile Include="ILeskTokenDefiner.cs" />
     <Compile Include="UnrecognizedTokenException.cs" />
     <Compile Include="Consumers\CombinedConsumer.cs" />
     <Compile Include="Consumers\ConfigurableConsumer.cs" />

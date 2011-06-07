@@ -6,15 +6,13 @@ namespace Lesk
     {
         public string Consumed { get; set; }
 
-        public int NumberConsumed
+        public int ConsumedLength
         {
             get
             {
                 return Consumed != null ? Consumed.Length : 0;
             }
         }
-
-        public int Priority { get; set; }
 
         public bool Success { get; set; }
 

@@ -1,17 +1,24 @@
 ﻿using System;
+using Lesk.ConsoleApp.ExampleTokens;
 
 namespace Lesk.ConsoleApp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             var input = string.Empty;
-            var lesk = new Lesk();
 
-            lesk.Add("[0-9]+", () => new NumberToken(), Lesk.AboveNormalPriority);
-            lesk.Add(":ap", () => new CommandToken());
-            lesk.Add(@"\s+", () => new WhitespaceToken());
+            var lesk =
+                Lesk.Configure
+                .DefineToken("[0-9]+", () => new Token())
+                .DefineToken(":ap", () => new CommandToken())
+                .DefineToken("SUM", () => new CommandToken())
+                .DefineToken(@"\s+", () => new WhitespaceToken())
+                .DefineToken(@"\w+", () => new WordToken())
+                .AsCompiled()
+                .Done();
+
             do
             {
                 Console.WriteLine("Enter your input : ");
@@ -25,20 +32,7 @@ namespace Lesk.ConsoleApp
                 {
                     Console.WriteLine(tokenException);
                 }
-
             } while (input != string.Empty);
         }
-    }
-
-    public class WhitespaceToken : Token
-    {
-    }
-
-    public class CommandToken : Token
-    {
-    }
-
-    public class NumberToken : Token
-    {
     }
 }

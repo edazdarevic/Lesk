@@ -14,7 +14,6 @@ namespace Lesk.Consumers
         public override ConsumeResult Consume(LeskContext context)
         {
             var result = new ConsumeResult();
-            result.Priority = 2;
             var queue = new Queue<char>(Value.ToCharArray());
             while (context.HasMore() && queue.Count > 0 && context.Current == queue.Dequeue())
             {
@@ -22,7 +21,7 @@ namespace Lesk.Consumers
                 context.Advance();
             }
 
-            if (result.NumberConsumed == Value.Length)
+            if (result.ConsumedLength == Value.Length)
             {
                 result.Success = true;
             }

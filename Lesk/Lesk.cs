@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Lesk.Consumers;
 
 namespace Lesk
 {
     public class Lesk
     {
-        public const int NormalPriority = 3;
-
-        public const int AboveNormalPriority = 2;
-
-        public const int HighPriority = 1;
-
-        public const int LowPriorty = 4;
-
-        public List<Tuple<Func<InputConsumer>, Func<Token>>> Consumers { get; private set; }
-
-        public Lesk()
+        public static LeskBuilder Configure
         {
-            Consumers = new List<Tuple<Func<InputConsumer>, Func<Token>>>();
+            get
+            {
+                return new LeskBuilder(new Lesk());
+            }
         }
 
-        public void Add(string pattern, Func<Token> tokenBuilder, int priority = NormalPriority)
+        private List<Tuple<Func<InputConsumer>, Func<Token>>> Consumers { get; set; }
+
+        private readonly Dictionary<string, Regex> _regexes = new Dictionary<string, Regex>();
+
+        private List<string> _patterns = new List<string>();
+
+        private bool _shouldCompile;
+
+        private Lesk()
         {
-            Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, priority), tokenBuilder));
+            Consumers = new List<Tuple<Func<InputConsumer>, Func<Token>>>();
         }
 
         public List<Token> Tokenize(string input)
@@ -56,33 +59,95 @@ namespace Lesk
                 }
                 else
                 {
-                    var highConsumed = succeded.Where(r => r.NumberConsumed == succeded.Max(r2 => r2.NumberConsumed));
-                    ConsumeResult finalFinal = null;
+                    var bestMatches = succeded.Where(r => r.ConsumedLength == succeded.Max(r2 => r2.ConsumedLength));
+                    ConsumeResult final = null;
 
-                    if (highConsumed.Count() == 1)
+                    if (bestMatches.Count() == 1)
                     {
-                        finalFinal = highConsumed.FirstOrDefault();
+                        final = bestMatches.FirstOrDefault();
                     }
-                    else if (highConsumed.Count() > 0)
+                    else if (bestMatches.Count() > 0)
                     {
-                        if (highConsumed.Where(r => r.Priority == highConsumed.Min(r2 => r2.Priority)).Count() > 1)
+                        if (bestMatches.Count() > 1)
                         {
-                            throw new InvalidOperationException("Cannot decided which token it is.");
+                            Trace.WriteLine("Warning : Multiple rules matched. Selecting the rule defined first.");
                         }
 
-                        finalFinal = highConsumed.OrderBy(r => r.Priority).FirstOrDefault();
+                        final = bestMatches.FirstOrDefault();
                     }
 
-                    if (finalFinal == null)
+                    if (final == null)
                     {
                         throw new InvalidOperationException("Unexpected error.");
                     }
 
-                    context.Apply(finalFinal);
+                    context.Apply(final);
                 }
             }
 
             return context.Tokens;
+        }
+
+        private void DefineToken(string pattern, Func<Token> tokenBuilder)
+        {
+            if (!_patterns.Contains(pattern))
+            {
+                _patterns.Add(pattern);
+            }
+
+            Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, _regexes), tokenBuilder));
+        }
+
+        private void Done()
+        {
+            _patterns.ForEach(pattern =>
+                {
+                    if (_shouldCompile)
+                    {
+                        _regexes.Add(pattern, new Regex(pattern, RegexOptions.Compiled));
+                    }
+                    else
+                    {
+                        _regexes.Add(pattern, new Regex(pattern));
+                    }
+                });
+
+            if (_shouldCompile)
+            {
+                // Regex objects with Compile option are compiled when first used
+                foreach (var regex in _regexes)
+                {
+                    regex.Value.Match("123456789abcd");
+                }
+            }
+        }
+
+        public class LeskBuilder : ILeskTokenDefiner
+        {
+            private readonly Lesk _lesk;
+
+            public LeskBuilder(Lesk lesk)
+            {
+                _lesk = lesk;
+            }
+
+            public ILeskTokenDefiner DefineToken(string pattern, Func<Token> tokenBuilder)
+            {
+                _lesk.DefineToken(pattern, tokenBuilder);
+                return this;
+            }
+
+            public ILeskTokenDefiner AsCompiled()
+            {
+                _lesk._shouldCompile = true;
+                return this;
+            }
+
+            public Lesk Done()
+            {
+                _lesk.Done();
+                return _lesk;
+            }
         }
     }
 }

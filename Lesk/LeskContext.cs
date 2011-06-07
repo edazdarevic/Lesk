@@ -53,7 +53,7 @@ namespace Lesk
 
         public void Apply(ConsumeResult consumeResult)
         {
-            _position += consumeResult.NumberConsumed;
+            _position += consumeResult.ConsumedLength;
             Tokens.Add(consumeResult.BuildToken());
         }
     }

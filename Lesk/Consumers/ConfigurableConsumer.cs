@@ -51,7 +51,6 @@ namespace Lesk.Consumers
         public override ConsumeResult Consume(LeskContext context)
         {
             var result = new ConsumeResult();
-            result.Priority = 4;
             while (context.HasMore() && ComformsWithSpec(context.Current))
             {
                 result.Consumed += context.Current.ToString();
@@ -59,7 +58,7 @@ namespace Lesk.Consumers
                 context.Advance();
             }
 
-            if (result.NumberConsumed > 0)
+            if (result.ConsumedLength > 0)
             {
                 result.Success = true;
             }

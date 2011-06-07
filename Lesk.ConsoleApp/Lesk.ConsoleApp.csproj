@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExampleTokens\CommandToken.cs" />
+    <Compile Include="ExampleTokens\NumberToken.cs" />
+    <Compile Include="ExampleTokens\WhitespaceToken.cs" />
+    <Compile Include="ExampleTokens\WordToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
