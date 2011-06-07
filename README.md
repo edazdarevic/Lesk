@@ -1,13 +1,37 @@
+## What is Lesk?
+Lesk is lexical analyser for .NET framework. Lexical analysers are also called lexers or tokenizes or scanners. Lexer transforms a sequence of characters to a sequence of tokens.
+
 ## How to use Lesk?
-Lesk is designed to be very simple to use. Regex is used for defining tokens. For example: 
+Lesk uses regular expressions for defining tokens. For example a JSON lexer would be defined like this: 
 
-`var lesk = new Lesk();`
+    var jsonLexer = LeskInstance.Configure
+                  .DefineToken(@"\s+", () => new WhitespaceToken())
+                  .DefineToken(":", () => new ColonToken())
+                  .DefineToken(",", () => new CommaToken())
+                  .DefineToken("{", () => new LBraceToken())
+                  .DefineToken("}", () => new RBraceToken())
+                  .DefineToken("true", () => new TrueFalseToken())
+                  .DefineToken("false", () => new TrueFalseToken())
+                  .DefineToken("null", () => new NullToken())
+                  .DefineToken("-?[0-9]+", () => new IntToken())
+                  .DefineToken("\".*?\"", () => new StringToken())
+                  .DefineToken(@"(-?[0-9]+)(\.[0-9]+)",()=> new DoubleToken())
+                  .AsCompiled()
+                  .Done();
 
-`lesk.Add("[0-9]+", () => new NumberToken(), Lesk.AboveNormalPriority);`
+To perform actual lexing call the `Tokenize` method 
 
-`lesk.Add(":ap", () => new CommandToken());`
+    List<Token> tokens = jsonLexer.Tokenize(yourStringHere); 
 
-`lesk.Add(@"\s+", () => new WhitespaceToken());`
+## How is Lesk implemented?
+Lesk internally relies on default .NET regular expression implementation. However, this might change in the future.
 
-## What is a lexer anyway?
+## Roadmap 
+0.4
 
+* Support for tokenizing directly from a Stream and yielding tokens as they become available 
+
+0.5 etc
+
+* Recursive definition of tokes 
+* Other cool stuff
