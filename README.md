@@ -33,5 +33,5 @@ Lesk internally relies on default .NET regular expression implementation. Howeve
 
 0.5 etc.
 
-* Recursive definition of tokes 
+* Recursive definition of tokens 
 * Other cool stuff
