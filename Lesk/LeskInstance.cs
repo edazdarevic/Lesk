@@ -7,13 +7,13 @@ using Lesk.Consumers;
 
 namespace Lesk
 {
-    public class Lesk
+    public class LeskInstance
     {
         public static LeskBuilder Configure
         {
             get
             {
-                return new LeskBuilder(new Lesk());
+                return new LeskBuilder(new LeskInstance());
             }
         }
 
@@ -21,11 +21,11 @@ namespace Lesk
 
         private readonly Dictionary<string, Regex> _regexes = new Dictionary<string, Regex>();
 
-        private List<string> _patterns = new List<string>();
+        private readonly List<string> _patterns = new List<string>();
 
         private bool _shouldCompile;
 
-        private Lesk()
+        private LeskInstance()
         {
             Consumers = new List<Tuple<Func<InputConsumer>, Func<Token>>>();
         }
@@ -124,29 +124,29 @@ namespace Lesk
 
         public class LeskBuilder : ILeskTokenDefiner
         {
-            private readonly Lesk _lesk;
+            private readonly LeskInstance _leskInstance;
 
-            public LeskBuilder(Lesk lesk)
+            public LeskBuilder(LeskInstance leskInstance)
             {
-                _lesk = lesk;
+                _leskInstance = leskInstance;
             }
 
             public ILeskTokenDefiner DefineToken(string pattern, Func<Token> tokenBuilder)
             {
-                _lesk.DefineToken(pattern, tokenBuilder);
+                _leskInstance.DefineToken(pattern, tokenBuilder);
                 return this;
             }
 
             public ILeskTokenDefiner AsCompiled()
             {
-                _lesk._shouldCompile = true;
+                _leskInstance._shouldCompile = true;
                 return this;
             }
 
-            public Lesk Done()
+            public LeskInstance Done()
             {
-                _lesk.Done();
-                return _lesk;
+                _leskInstance.Done();
+                return _leskInstance;
             }
         }
     }

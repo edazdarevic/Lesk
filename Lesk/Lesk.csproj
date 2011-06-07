@@ -48,7 +48,7 @@
     <Compile Include="ConsumeResult.cs" />
     <Compile Include="Consumers\FixedStringConsumer.cs" />
     <Compile Include="Consumers\InputConsumer.cs" />
-    <Compile Include="Lesk.cs" />
+    <Compile Include="LeskInstance.cs" />
     <Compile Include="LeskContext.cs" />
     <Compile Include="Consumers\LetterConsumer.cs" />
     <Compile Include="Consumers\NumberConsumer.cs" />

@@ -8,6 +8,6 @@ namespace Lesk
 
         ILeskTokenDefiner AsCompiled();
 
-        Lesk Done();
+        LeskInstance Done();
     }
 }

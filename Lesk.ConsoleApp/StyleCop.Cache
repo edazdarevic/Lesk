@@ -1,8 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <project key="2061616301">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="NumberToken.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>06/06/2011 16:34:07</timestamp>
@@ -12,7 +9,16 @@
     <milliseconds>435</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="WhitespaceToken.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+  <sourcecode name="StringLiteral.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>06/06/2011 16:34:07</timestamp>
+      <milliseconds>238</milliseconds>
+    </settings>
+    <timestamp>06/07/2011 10:42:31</timestamp>
+    <milliseconds>544</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="WordToken.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>06/06/2011 16:34:07</timestamp>
       <milliseconds>238</milliseconds>
@@ -21,7 +27,7 @@
     <milliseconds>455</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="WordToken.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+  <sourcecode name="WhitespaceToken.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>06/06/2011 16:34:07</timestamp>
       <milliseconds>238</milliseconds>
@@ -48,22 +54,20 @@
     <milliseconds>192</milliseconds>
     <violations />
   </sourcecode>
+  <project key="2061616301">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="Program.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>06/06/2011 16:34:07</timestamp>
       <milliseconds>238</milliseconds>
     </settings>
-    <timestamp>06/07/2011 10:27:20</timestamp>
-    <milliseconds>748</milliseconds>
+    <timestamp>06/07/2011 13:43:03</timestamp>
+    <milliseconds>696</milliseconds>
     <violations>
       <violation namespace="Microsoft.StyleCop.CSharp.LayoutRules" rule="CurlyBracketsForMultiLineStatementsMustNotShareLine" ruleCheckId="SA1500">
         <context>If a statement spans multiple lines, the closing curly bracket must be placed on its own line.</context>
-        <line>35</line>
-        <warning>False</warning>
-      </violation>
-      <violation namespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" rule="AccessModifierMustBeDeclared" ruleCheckId="SA1400">
-        <context>The method must have an access modifier.</context>
-        <line>8</line>
+        <line>36</line>
         <warning>False</warning>
       </violation>
     </violations>

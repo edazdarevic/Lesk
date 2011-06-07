@@ -5,17 +5,18 @@ namespace Lesk.ConsoleApp
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var input = string.Empty;
 
             var lesk =
-                Lesk.Configure
-                .DefineToken("[0-9]+", () => new Token())
+                LeskInstance.Configure
+                .DefineToken("[0-9]+", () => new NumberToken())
                 .DefineToken(":ap", () => new CommandToken())
                 .DefineToken("SUM", () => new CommandToken())
                 .DefineToken(@"\s+", () => new WhitespaceToken())
                 .DefineToken(@"\w+", () => new WordToken())
+                .DefineToken("\".*", () => new StringLiteral())
                 .AsCompiled()
                 .Done();
 
