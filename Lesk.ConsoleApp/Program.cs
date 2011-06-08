@@ -12,8 +12,10 @@ namespace Lesk.ConsoleApp
             var lesk =
                 LeskInstance.Configure
                 .DefineToken("[0-9]+", () => new NumberToken())
+                .DefineToken("=", () => new AssignmentOperatorToken())
+                .DefineToken(";", () => new SemicolonToken())
                 .DefineToken(":ap", () => new CommandToken())
-                .DefineToken("SUM", () => new CommandToken())
+                .DefineToken("SUM", () => new CommandToken(), true)
                 .DefineToken(@"\s+", () => new WhitespaceToken())
                 .DefineToken(@"\w+", () => new WordToken())
                 .DefineToken("\".*", () => new StringLiteral())

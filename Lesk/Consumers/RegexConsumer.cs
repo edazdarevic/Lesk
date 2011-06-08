@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace Lesk.Consumers
 {
@@ -8,9 +7,9 @@ namespace Lesk.Consumers
     {
         public string Pattern { get; private set; }
 
-        public Dictionary<string, Regex> RegexLookup { get; private set; }
+        public Dictionary<string, RegexInfo> RegexLookup { get; private set; }
 
-        public RegexConsumer(string pattern, Dictionary<string, Regex> regexLookup)
+        public RegexConsumer(string pattern, Dictionary<string, RegexInfo> regexLookup)
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -30,7 +29,7 @@ namespace Lesk.Consumers
         {
             var result = new ConsumeResult();
 
-            var match = RegexLookup[Pattern].Match(context.Input, context.Position);
+            var match = RegexLookup[Pattern].Regex.Match(context.Input, context.Position);
 
             if (match.Success && match.Index == context.Position && match.Length > 0)
             {

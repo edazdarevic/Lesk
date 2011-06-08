@@ -19,9 +19,7 @@ namespace Lesk
 
         private List<Tuple<Func<InputConsumer>, Func<Token>>> Consumers { get; set; }
 
-        private readonly Dictionary<string, Regex> _regexes = new Dictionary<string, Regex>();
-
-        private readonly List<string> _patterns = new List<string>();
+        private readonly Dictionary<string, RegexInfo> _regexes = new Dictionary<string, RegexInfo>();
 
         private bool _shouldCompile;
 
@@ -88,11 +86,21 @@ namespace Lesk
             return context.Tokens;
         }
 
-        private void DefineToken(string pattern, Func<Token> tokenBuilder)
+        private void DefineToken(string pattern, Func<Token> tokenBuilder, bool caseInsensitive = false)
         {
-            if (!_patterns.Contains(pattern))
+            if (!_regexes.ContainsKey(pattern))
             {
-                _patterns.Add(pattern);
+                var regexInfo = new RegexInfo()
+                                    {
+                                        Pattern = pattern,
+                                    };
+
+                if (caseInsensitive)
+                {
+                    regexInfo.Options = RegexOptions.IgnoreCase;
+                }
+
+                _regexes.Add(pattern, regexInfo);
             }
 
             Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, _regexes), tokenBuilder));
@@ -100,24 +108,22 @@ namespace Lesk
 
         private void Done()
         {
-            _patterns.ForEach(pattern =>
+            foreach (var regexInfo in _regexes)
+            {
+                if (_shouldCompile)
                 {
-                    if (_shouldCompile)
-                    {
-                        _regexes.Add(pattern, new Regex(pattern, RegexOptions.Compiled));
-                    }
-                    else
-                    {
-                        _regexes.Add(pattern, new Regex(pattern));
-                    }
-                });
+                    regexInfo.Value.Options |= RegexOptions.Compiled;
+                }
+
+                regexInfo.Value.Regex = new Regex(regexInfo.Value.Pattern, regexInfo.Value.Options);
+            }
 
             if (_shouldCompile)
             {
                 // Regex objects with Compile option are compiled when first used
                 foreach (var regex in _regexes)
                 {
-                    regex.Value.Match("123456789abcd");
+                    regex.Value.Regex.Match("123456789abcd");
                 }
             }
         }
@@ -131,9 +137,9 @@ namespace Lesk
                 _leskInstance = leskInstance;
             }
 
-            public ILeskTokenDefiner DefineToken(string pattern, Func<Token> tokenBuilder)
+            public ILeskTokenDefiner DefineToken(string pattern, Func<Token> tokenBuilder, bool caseInsensitive = false)
             {
-                _leskInstance.DefineToken(pattern, tokenBuilder);
+                _leskInstance.DefineToken(pattern, tokenBuilder, caseInsensitive);
                 return this;
             }
 
