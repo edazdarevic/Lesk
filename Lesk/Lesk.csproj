@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Consumers\RegexConsumer.cs" />
     <Compile Include="ILeskTokenDefiner.cs" />
+    <Compile Include="LeskConfigurationException.cs" />
     <Compile Include="RegexInfo.cs" />
     <Compile Include="UnrecognizedTokenException.cs" />
     <Compile Include="ConsumeResult.cs" />

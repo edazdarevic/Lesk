@@ -88,22 +88,29 @@ namespace Lesk
 
         private void DefineToken(string pattern, Func<Token> tokenBuilder, bool caseInsensitive = false)
         {
-            if (!_regexes.ContainsKey(pattern))
+            try
             {
-                var regexInfo = new RegexInfo()
-                                    {
-                                        Pattern = pattern,
-                                    };
-
-                if (caseInsensitive)
+                if (!_regexes.ContainsKey(pattern))
                 {
-                    regexInfo.Options = RegexOptions.IgnoreCase;
+                    var regexInfo = new RegexInfo()
+                                        {
+                                            Pattern = pattern,
+                                        };
+
+                    if (caseInsensitive)
+                    {
+                        regexInfo.Options = RegexOptions.IgnoreCase;
+                    }
+
+                    _regexes.Add(pattern, regexInfo);
                 }
 
-                _regexes.Add(pattern, regexInfo);
+                Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, _regexes), tokenBuilder));
             }
-
-            Consumers.Add(new Tuple<Func<InputConsumer>, Func<Token>>(() => new RegexConsumer(pattern, _regexes), tokenBuilder));
+            catch (Exception exception)
+            {
+                throw new LeskConfigurationException(exception);
+            }
         }
 
         private void Done()
