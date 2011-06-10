@@ -115,23 +115,30 @@ namespace Lesk
 
         private void Done()
         {
-            foreach (var regexInfo in _regexes)
+            try
             {
+                foreach (var regexInfo in _regexes)
+                {
+                    if (_shouldCompile)
+                    {
+                        regexInfo.Value.Options |= RegexOptions.Compiled;
+                    }
+
+                    regexInfo.Value.Regex = new Regex(regexInfo.Value.Pattern, regexInfo.Value.Options);
+                }
+
                 if (_shouldCompile)
                 {
-                    regexInfo.Value.Options |= RegexOptions.Compiled;
+                    // Regex objects with Compile option are compiled when first used
+                    foreach (var regex in _regexes)
+                    {
+                        regex.Value.Regex.Match("123456789abcd");
+                    }
                 }
-
-                regexInfo.Value.Regex = new Regex(regexInfo.Value.Pattern, regexInfo.Value.Options);
             }
-
-            if (_shouldCompile)
+            catch (Exception exception)
             {
-                // Regex objects with Compile option are compiled when first used
-                foreach (var regex in _regexes)
-                {
-                    regex.Value.Regex.Match("123456789abcd");
-                }
+                throw new LeskConfigurationException(exception);
             }
         }
 
