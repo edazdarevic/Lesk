@@ -60,20 +60,12 @@ namespace Lesk
                     var bestMatches = succeded.Where(r => r.ConsumedLength == succeded.Max(r2 => r2.ConsumedLength));
                     ConsumeResult final = null;
 
-                    if (bestMatches.Count() == 1)
+                    if (bestMatches.Count() > 1)
                     {
-                        final = bestMatches.FirstOrDefault();
-                    }
-                    else if (bestMatches.Count() > 0)
-                    {
-                        if (bestMatches.Count() > 1)
-                        {
-                            Trace.WriteLine("Warning : Multiple rules matched. Selecting the rule defined first.");
-                        }
-
-                        final = bestMatches.FirstOrDefault();
+                        Trace.WriteLine("Warning : Multiple rules matched. Selecting the rule defined first.");
                     }
 
+                    final = bestMatches.FirstOrDefault();
                     if (final == null)
                     {
                         throw new InvalidOperationException("Unexpected error.");
