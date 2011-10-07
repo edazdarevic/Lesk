@@ -6,7 +6,7 @@ namespace Lesk
     {
         public Regex Regex { get; set; }
 
-        public RegexOptions Options { get; set; }
+        public RegexOptions Options { get; set; } 
 
         public string Pattern { get; set; }
     }
