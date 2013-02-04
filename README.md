@@ -35,3 +35,6 @@ Lesk internally relies on default .NET regular expression implementation. Howeve
 
 * Recursive definition of tokens 
 * Other cool stuff
+
+## License 
+Lesk is released under MIT License.
